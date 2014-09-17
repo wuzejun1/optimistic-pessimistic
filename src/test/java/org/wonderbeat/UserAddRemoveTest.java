@@ -34,13 +34,13 @@ public class UserAddRemoveTest {
     @Test
     public void addUser() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/user/add").contentType(MediaType
-                .APPLICATION_FORM_URLENCODED).param("userId", "123"))
+                .APPLICATION_FORM_URLENCODED).param("userId", "12356"))
                 .andExpect(MockMvcResultMatchers.status().isFound());
     }
 
     public void removeUser() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/user/block").contentType(MediaType
-                .APPLICATION_FORM_URLENCODED).param("userId", "123"))
+                .APPLICATION_FORM_URLENCODED).param("userId", "12356"))
                 .andExpect(MockMvcResultMatchers.status().isFound());
     }
 }
