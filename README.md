@@ -1,4 +1,10 @@
 optimistic-pessimistic
 ======================
 
-JPA2 lock modes example
+Spring based Web Application.  
+Users could transfer money from account to account.  
+Goal - keep DB consistent.
+
+This example contains 2 possible solutions:
+* Optimistic concurency control
+* Isolation and PESSIMISTIC_WRITE locking
