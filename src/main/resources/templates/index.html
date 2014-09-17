@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+</head>
+<body class="container">
+    <section class="panel panel-primary col-md-6 col-sm-6">
+        <div class="panel-heading">
+            <h3 class="panel-title">Admin panel</h3>
+        </div>
+        <div class="panel-body">
+            <form method="POST" action="/user/add">
+                <div class="form-group">
+                    <legend>Create user</legend>
+                    <input class="form-control" name="userId" type="number" placeholder="User ID"/>
+                    <input class="form-control btn btn-default" type="submit"/>
+                </div>
+            </form>
+            <form method="POST" action="/user/block">
+                <div class="form-group">
+                    <legend>Block user</legend>
+                    <input class="form-control" name="userId" type="number" placeholder="User ID"/>
+                    <input class="form-control btn btn-default" type="submit"/>
+                </div>
+            </form>
+            <form method="POST" action="/money/transfer">
+                <fieldset>
+                    <legend>Money transfer</legend>
+                    <input class="form-control" name="from" type="number" placeholder="User ID"/>
+                    <input class="form-control" name="to" type="number" placeholder="Destination user ID"/>
+                    <input class="form-control" name="amount" type="number" placeholder="Amount"/>
+                    <input class="form-control btn btn-default" type="submit"/>
+                </fieldset>
+            </form>
+            <form method="POST" action="/money/deposit">
+                <fieldset>
+                    <legend>Deposit</legend>
+                    <input class="form-control" name="userId" type="number" placeholder="User ID"/>
+                    <input class="form-control" name="amount" type="number" placeholder="Amount"/>
+                    <input class="form-control btn btn-default" type="submit"/>
+                </fieldset>
+            </form>
+            <form method="POST" action="/money/withdraw">
+                <fieldset>
+                    <legend>Withdraw</legend>
+                    <input class="form-control" name="userId" type="number" placeholder="User ID"/>
+                    <input class="form-control" name="amount" type="number" placeholder="Amount"/>
+                    <input class="form-control btn btn-default" type="submit"/>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+    <section class="panel panel-info col-md-6 col-sm-6">
+        <div class="panel-heading">
+            <h3 class="panel-title">Monitoring</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-responsive ">
+                <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Blocked</th>
+                    <th>Balance</th>
+                </tr>
+                </thead>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.userId}"/>
+                    <td th:text="${user.blocked}"/>
+                    <td th:text="${user.amount}"/>
+                </tr>
+            </table>
+        </div>
+    </section>
+</body>
+</html>
