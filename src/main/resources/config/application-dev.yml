@@ -5,12 +5,12 @@ spring:
     profiles: dev
     
     datasource:
-        dataSourceClassName: org.h2.jdbcx.JdbcDataSource
-        url: jdbc:h2:mem:jhipster
+        dataSourceClassName: oracle.jdbc.pool.OracleDataSource
+        url: jdbc:oracle:thin:@10.5.111.105:1521:ewallet
         databaseName: 
         serverName: 
-        username: 
-        password: 
+        username: gateway
+        password: gateway
 
     jpa:
         database-platform: org.hibernate.dialect.H2Dialect

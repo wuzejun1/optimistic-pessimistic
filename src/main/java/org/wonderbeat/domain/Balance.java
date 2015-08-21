@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "BALANCE")
+@Table(name = "TEST_BALANCE")
 public class Balance extends AbstractPersistable<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;

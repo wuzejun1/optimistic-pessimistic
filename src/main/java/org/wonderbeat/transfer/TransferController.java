@@ -24,7 +24,11 @@ public class TransferController implements Serializable {
     @RequestMapping(value = "/transfer", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public String transfer(@ModelAttribute @Valid TransferCommand command) {
-        moneyTransfer.transfer(command.getFrom(), command.getTo(), command.getAmount());
+        try {
+            moneyTransfer.transfer(command.getFrom(), command.getTo(), command.getAmount());
+        }  catch(RuntimeException re) {
+
+        }
         return "redirect:/";
     }
 

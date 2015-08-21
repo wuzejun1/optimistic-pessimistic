@@ -14,6 +14,7 @@ import org.wonderbeat.repository.PessimisticUserRepository;
 import org.wonderbeat.transfer.service.MoneyTransferService;
 import org.wonderbeat.transfer.service.PersistentMoneyTransferService;
 import org.wonderbeat.transfer.service.impl.IsolationBasedTransferService;
+import org.wonderbeat.transfer.service.impl.OptimisticLockTransferService;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;

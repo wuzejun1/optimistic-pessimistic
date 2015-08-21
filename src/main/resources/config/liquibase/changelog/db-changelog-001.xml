@@ -6,10 +6,11 @@
 
     <property name="now" value="now()" dbms="mysql,h2"/>
     <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
 
     <changeSet id="1" author="wonderbeat">
         <createSequence sequenceName="BALANCE_SEQ" startValue="1"/>
-        <createTable tableName="BALANCE">
+        <createTable tableName="TEST_BALANCE">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -22,7 +23,7 @@
         </createTable>
 
         <createSequence sequenceName="USER_SEQ" startValue="1"/>
-        <createTable tableName="USER">
+        <createTable tableName="TEST_USER">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -36,7 +37,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="balance_id" type="bigint">
-                <constraints foreignKeyName="balance_fk" references="user(id)" nullable="false" unique="true"/>
+                <constraints foreignKeyName="balance_fk" references="TEST_USER(id)" nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>

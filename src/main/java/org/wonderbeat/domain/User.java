@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "TEST_USER")
 public class User extends AbstractPersistable<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
