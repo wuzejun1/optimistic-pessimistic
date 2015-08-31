@@ -47,15 +47,10 @@ public class DatabaseConfiguration implements EnvironmentAware {
             throw new ApplicationContextException("Database connection pool is not configured correctly");
         }
         HikariConfig config = new HikariConfig();
-        config.setDataSourceClassName(propertyResolver.getProperty("dataSourceClassName"));
-        if (propertyResolver.getProperty("url") == null || "".equals(propertyResolver.getProperty("url"))) {
-            config.addDataSourceProperty("databaseName", propertyResolver.getProperty("databaseName"));
-            config.addDataSourceProperty("serverName", propertyResolver.getProperty("serverName"));
-        } else {
-            config.addDataSourceProperty("url", propertyResolver.getProperty("url"));
-        }
-        config.addDataSourceProperty("user", propertyResolver.getProperty("username"));
-        config.addDataSourceProperty("password", propertyResolver.getProperty("password"));
+        config.setDriverClassName(propertyResolver.getProperty("driverClassName"));
+        config.setJdbcUrl(propertyResolver.getProperty("jdbcUrl"));
+        config.setUsername(propertyResolver.getProperty("username"));
+        config.setPassword(propertyResolver.getProperty("password"));
 
         return new HikariDataSource(config);
     }
@@ -67,14 +62,7 @@ public class DatabaseConfiguration implements EnvironmentAware {
         return basePackages;
     }
 
-    @Bean
-    public SpringLiquibase liquibase(DataSource dataSource) {
-        SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setDataSource(dataSource);
-        liquibase.setChangeLog("classpath:config/liquibase/master.xml");
-        liquibase.setContexts("development, production");
-        return liquibase;
-    }
+
 
 }
 

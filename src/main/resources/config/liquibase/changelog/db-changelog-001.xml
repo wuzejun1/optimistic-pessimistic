@@ -9,9 +9,11 @@
     <property name="now" value="sysdate" dbms="oracle"/>
 
     <changeSet id="1" author="wonderbeat">
+        <!-- hibernate 序列 -->
+        <createSequence sequenceName="hibernate_sequence" startValue="1"/>
         <createSequence sequenceName="BALANCE_SEQ" startValue="1"/>
         <createTable tableName="TEST_BALANCE">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column name="id" type="bigint" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="amount" type="int" defaultValue="0">
@@ -24,7 +26,7 @@
 
         <createSequence sequenceName="USER_SEQ" startValue="1"/>
         <createTable tableName="TEST_USER">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column name="id" type="bigint" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="ident" type="int">
@@ -37,7 +39,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="balance_id" type="bigint">
-                <constraints foreignKeyName="balance_fk" references="TEST_USER(id)" nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>

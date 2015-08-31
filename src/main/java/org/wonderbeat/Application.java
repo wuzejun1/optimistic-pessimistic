@@ -1,5 +1,6 @@
 package org.wonderbeat;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -10,14 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.SimpleCommandLinePropertySource;
 import org.wonderbeat.config.Constants;
-import org.wonderbeat.repository.PessimisticUserRepository;
-import org.wonderbeat.transfer.service.MoneyTransferService;
-import org.wonderbeat.transfer.service.PersistentMoneyTransferService;
-import org.wonderbeat.transfer.service.impl.IsolationBasedTransferService;
-import org.wonderbeat.transfer.service.impl.OptimisticLockTransferService;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -40,11 +37,6 @@ public class Application {
         }
     }
 
-    @Bean
-    public MoneyTransferService moneyTransfer(PessimisticUserRepository repository) {
-        PersistentMoneyTransferService persistentMoneyTransferService = new PersistentMoneyTransferService(repository);
-        return new IsolationBasedTransferService(persistentMoneyTransferService);
-    }
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Application.class);
@@ -65,4 +57,13 @@ public class Application {
             app.setAdditionalProfiles(Constants.SPRING_PROFILE_DEVELOPMENT);
         }
     }
+    @Bean
+    public SpringLiquibase liquibase(DataSource dataSource) {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setDataSource(dataSource);
+        liquibase.setChangeLog("classpath:config/liquibase/master.xml");
+        liquibase.setContexts("development, production");
+        return liquibase;
+    }
+
 }

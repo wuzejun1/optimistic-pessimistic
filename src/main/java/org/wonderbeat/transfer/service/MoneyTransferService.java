@@ -14,4 +14,6 @@ public interface MoneyTransferService {
      * @return updated balance for user transfer was made to
      */
     Integer transfer(Integer from, Integer to, Integer amount);
+
+    void switchLockType(String lock);
 }
